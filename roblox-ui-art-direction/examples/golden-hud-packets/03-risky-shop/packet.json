@@ -1,0 +1,84 @@
+{
+  "$schema": "../../../schemas/hud-spec.schema.json",
+  "schemaVersion": "1.0",
+  "packetId": "HP-golden-03-shop",
+  "status": { "fictional": true, "visualVerdict": "pendente — sem captura" },
+  "game": { "name": "Pit Lane Garage (fictício)", "genre": "corrida arcade de rua", "visualStyle": "garagem noturna com neon" },
+  "screen": { "id": "garage-shop", "name": "Loja da Garagem", "task": "confirmar", "context": "loja", "gameplay": false, "risk": "critical" },
+  "phase": "A",
+  "decisions": [
+    { "id": "LD-pitlane-shop-01", "kind": "layout", "summary": "commerce.catalog-detail com vitrine de destaque acima do catálogo", "status": "decidido" },
+    { "id": "H-01", "kind": "human", "summary": "Foco inicial em Cancelar na confirmação", "status": "pendente" }
+  ],
+  "layout": {
+    "decisionId": "LD-pitlane-shop-01",
+    "pattern": "commerce.catalog-detail",
+    "rejected": [
+      { "pattern": "collection.grid-detail", "reason": "grade com detalhe lateral rebaixa o produto; aqui o preview 3D é o herói" },
+      { "pattern": "reward.track-reveal", "reason": "roleta/reveal conflita com preço sempre explícito" }
+    ]
+  },
+  "platforms": [
+    { "id": "desktop", "supported": true, "composition": "header com saldo; vitrine com ViewportFrame + info + comprar; tabs; fileira de cards", "reflowTrigger": "base" },
+    { "id": "ultrawide", "supported": true, "composition": "root limitado e centralizado", "reflowTrigger": "largura > máximo do root" },
+    { "id": "phone-portrait", "supported": true, "composition": "vitrine 16:9, botão de compra largo, tabs roláveis, grid 2 colunas", "reflowTrigger": "largura < limite para vitrine + stats lado a lado" },
+    { "id": "phone-landscape", "supported": true, "composition": "vitrine à esquerda, catálogo rolável à direita", "reflowTrigger": "ViewportDisplaySize == Small e aspecto > 1" },
+    { "id": "tablet", "supported": true, "composition": "igual ao desktop", "reflowTrigger": "mesma regra do desktop" },
+    { "id": "console-tv", "supported": true, "composition": "LB/RB categorias; vitrine acompanha seleção; TV-safe", "reflowTrigger": "PreferredInput == Gamepad" }
+  ],
+  "inputs": { "mouseKeyboard": true, "touch": true, "gamepad": true },
+  "focus": {
+    "initial": "tabs-category",
+    "back": "B fecha a confirmação sem comprar; na loja, B fecha a garagem",
+    "route": ["tabs-category", "card-product", "btn-buy", "confirm-footer"]
+  },
+  "layers": [
+    { "screenGui": "GarageShopGui", "layer": "Menu", "displayOrder": 20, "screenInsets": "CoreUISafeInsets" },
+    { "screenGui": "PurchaseConfirmGui", "layer": "Modal", "displayOrder": 40, "screenInsets": "CoreUISafeInsets" }
+  ],
+  "components": [
+    { "id": "showcase", "type": "Panel", "role": "vitrine do produto herói com ViewportFrame", "assets": ["bg.garage"], "states": ["idle", "pending"] },
+    { "id": "balance-tokens", "type": "CurrencyPill", "role": "saldo de Fichas no header", "assets": ["icon.currency.tokens"], "states": ["idle", "pending", "success", "error"] },
+    { "id": "tabs-category", "type": "Tab", "role": "categorias da loja", "states": ["idle", "hover", "selected", "focus"] },
+    { "id": "card-product", "type": "ItemCard", "role": "produto com preço, moeda e estado possuído", "assets": ["atlas.cars.thumbs"], "states": ["idle", "hover", "selected", "focus", "disabled"] },
+    { "id": "btn-buy", "type": "Button", "role": "comprar com preço e moeda no rótulo", "states": ["idle", "hover", "press", "focus", "disabled", "pending", "success", "error"] },
+    { "id": "confirm-modal", "type": "Modal", "role": "confirmação de compra com Fichas", "states": ["idle", "pending", "error"] },
+    { "id": "confirm-footer", "type": "ConfirmationFooter", "role": "Cancelar e Confirmar com saldo após a compra", "states": ["idle", "focus", "pending", "success", "error"] },
+    { "id": "toast-result", "type": "Toast", "role": "resultado discreto da compra", "states": ["success", "error"] },
+    { "id": "err-shop", "type": "ErrorState", "role": "falha ao carregar a loja", "states": ["error", "pending"] }
+  ],
+  "states": [
+    { "id": "empty", "applicable": true, "text": "Novas pinturas na segunda-feira", "action": "ver outra categoria", "recovery": "n/a", "captureRequired": true },
+    { "id": "loading", "applicable": true, "text": "(skeleton; preços ocultos)", "action": "comprar desabilitado", "recovery": "timeout → error", "captureRequired": true },
+    { "id": "error", "applicable": true, "text": "A loja não carregou.", "action": "Tentar de novo", "recovery": "refetch do catálogo", "captureRequired": true },
+    { "id": "disabled", "applicable": true, "text": "Faltam 3.600 Fichas", "action": "Ganhar Fichas", "recovery": "n/a", "captureRequired": true },
+    { "id": "pending", "applicable": true, "text": "Processando compra…", "action": "tudo bloqueado", "recovery": "erro → error com saldo intacto", "captureRequired": true },
+    { "id": "overflow", "applicable": true, "text": "fileira maior que a tela", "action": "rolar", "recovery": "n/a", "captureRequired": true },
+    { "id": "full", "applicable": true, "text": "Possuído", "action": "Equipar", "recovery": "n/a", "captureRequired": true },
+    { "id": "success", "applicable": true, "text": "Neon Viper é seu!", "action": "Equipar agora / Continuar", "recovery": "n/a", "captureRequired": true },
+    { "id": "robux-cancelled", "applicable": true, "text": "(prompt nativo fechado)", "action": "nenhuma", "recovery": "volta ao botão sem mudança", "captureRequired": true }
+  ],
+  "risk": {
+    "cancel": "Cancelar e B fecham a confirmação; prompt nativo de Robux pode ser cancelado pelo jogador",
+    "recovery": "falha não altera saldo nem posse; botão volta ao estado anterior",
+    "errorHandling": "mensagem com motivo (saldo, indisponível, rede) e tentar de novo",
+    "confirmation": "modal com produto, preço, moeda e saldo após; Robux via prompt nativo",
+    "serverAuthority": "preços, saldo e posse do servidor; Fichas debitadas atomicamente; Robux concedido só em ProcessReceipt/verificação de passe"
+  },
+  "assets": [
+    { "id": "bg.garage", "status": "planned", "robloxAssetId": null, "fallback": "gradiente nativo escuro" },
+    { "id": "icon.currency.tokens", "status": "planned", "robloxAssetId": null, "fallback": "círculo amarelo com F" },
+    { "id": "atlas.cars.thumbs", "status": "prompt-ready", "robloxAssetId": null, "fallback": "nome + silhueta nativa" }
+  ],
+  "evidence": [
+    { "id": "E-01", "kind": "official", "claim": "Modal acima do menu via DisplayOrder maior", "source": "OF-01", "date": "2026-10-22", "confidence": "alta" },
+    { "id": "E-02", "kind": "heuristic", "claim": "Diálogos prendem o foco e o devolvem ao fechar", "source": "AC-03 XAG 113", "date": "2026-10-22", "confidence": "média" },
+    { "id": "E-03", "kind": "hypothesis", "claim": "Vitrine 3D aumenta clareza do que se compra", "source": "proposta desta especificação", "date": "2026-10-22", "confidence": "baixa" }
+  ],
+  "manualActions": [
+    { "id": "M-01", "action": "Decidir H-01 (foco inicial em Cancelar)", "owner": "dono do projeto" },
+    { "id": "M-02", "action": "Criar game passes/developer products reais e registrar IDs no servidor", "owner": "dono do projeto", "blocks": "integração Robux" },
+    { "id": "M-03", "action": "Capturar estados incluindo prompt nativo de Robux em conta de teste", "owner": "QA no cliente", "blocks": "veredito visual" },
+    { "id": "M-04", "action": "Produzir bg.garage, icon.currency.tokens e atlas.cars.thumbs", "owner": "artista", "blocks": "fase D" }
+  ]
+}

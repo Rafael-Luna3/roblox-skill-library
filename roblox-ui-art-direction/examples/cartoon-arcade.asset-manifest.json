@@ -1,0 +1,270 @@
+{
+  "$schemaVersion": "1.0",
+  "game": "Bloop Brawl (simulado)",
+  "theme": "toy-sticker",
+  "styleAnchor": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente.",
+  "assets": [
+    {
+      "id": "panel.toy.default",
+      "purpose": "Painel de plástico creme com bevel pintado",
+      "type": "frame-9slice",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          96,
+          96,
+          416,
+          416
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Painel de plástico creme com bevel pintado. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "InventoryGui.Root"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "button.toy.base",
+      "purpose": "Botão de plástico branco tintável",
+      "type": "button",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 256,
+        "height": 128
+      },
+      "aspectRatio": "256:128",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          48,
+          48,
+          208,
+          80
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.4
+      },
+      "states": [
+        "idle",
+        "hover",
+        "press",
+        "disabled"
+      ],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Botão de plástico branco tintável. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ToyButton"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "frame.card.rarity",
+      "purpose": "Moldura de card tintável por raridade",
+      "type": "frame-9slice",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          48,
+          48,
+          208,
+          208
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.4
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Moldura de card tintável por raridade. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "RarityCard"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "illus.chest.closed",
+      "purpose": "Baú de brinquedo fechado",
+      "type": "illustration",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Baú de brinquedo fechado. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ChestOpenScreen"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "illus.chest.open",
+      "purpose": "Baú de brinquedo aberto com luz saindo",
+      "type": "illustration",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Baú de brinquedo aberto com luz saindo. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ChestOpenScreen"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "fx.burst.sheet",
+      "purpose": "Flipbook 4x4 de explosão de brilho",
+      "type": "spritesheet",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 1024,
+        "height": 1024
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Flipbook 4x4 de explosão de brilho. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ChestOpenScreen.Burst"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "atlas.hats",
+      "purpose": "Atlas 8x8 de ícones de chapéus 128px",
+      "type": "spritesheet",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 1024,
+        "height": 1024
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Atlas 8x8 de ícones de chapéus 128px. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "RarityCard.Icon"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "icon.currency.coin",
+      "purpose": "Moeda adesivo com borda branca",
+      "type": "icon",
+      "theme": "toy-sticker",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Ilustração cartoon de brinquedo de plástico, cel-shading 2 tons, contorno marrom-escuro 6px, luz superior esquerda, sem texto, fundo transparente. Asset: Moeda adesivo com borda branca. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "CurrencyPill"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    }
+  ]
+}

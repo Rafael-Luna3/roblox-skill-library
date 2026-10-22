@@ -1,0 +1,52 @@
+{
+  "$schemaVersion": "1.0",
+  "game": "<nome-do-jogo>",
+  "theme": "<nome-do-tema>",
+  "styleAnchor": "<bloco de estilo compartilhado usado em todos os prompts; sem texto, sem marca d'água>",
+  "assets": [
+    {
+      "id": "panel.frame.default",
+      "purpose": "Moldura de todos os painéis principais",
+      "type": "frame-9slice",
+      "theme": "<nome-do-tema>",
+      "size": { "width": 512, "height": 512 },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": { "sliceCenter": [64, 64, 448, 448], "sliceScaleDesktop": 0.5, "sliceScaleMobile": 0.35 },
+      "states": ["default"],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "<styleAnchor> + descrição do asset + uso + composição + evitar",
+      "source": "planned",
+      "license": "<a definir>",
+      "status": "planned",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame + UIStroke(border.default) + UICorner(theme radius)",
+      "usedBy": ["<Tela>.Root"],
+      "notes": ""
+    },
+    {
+      "id": "icon.currency.primary",
+      "purpose": "Ícone da moeda principal no HUD e na loja",
+      "type": "icon",
+      "theme": "<nome-do-tema>",
+      "size": { "width": 256, "height": 256 },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": ["default"],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "<styleAnchor> + ícone ...",
+      "source": "planned",
+      "license": "<a definir>",
+      "status": "planned",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Círculo nativo na cor currency.primary com inicial, marcado PLACEHOLDER",
+      "usedBy": ["HUD.CurrencyPill", "Shop.PriceTag"],
+      "notes": ""
+    }
+  ]
+}

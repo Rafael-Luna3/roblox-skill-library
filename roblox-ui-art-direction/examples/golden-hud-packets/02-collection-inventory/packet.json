@@ -1,0 +1,84 @@
+{
+  "$schema": "../../../schemas/hud-spec.schema.json",
+  "schemaVersion": "1.0",
+  "packetId": "HP-golden-02-collection",
+  "status": { "fictional": true, "visualVerdict": "pendente — sem captura" },
+  "game": { "name": "Field Atlas (fictício)", "genre": "exploração e coleção naturalista", "visualStyle": "caderno de campo a nanquim" },
+  "screen": { "id": "field-journal", "name": "Diário de Campo", "task": "comparar", "context": "menu", "gameplay": false, "risk": "medium" },
+  "phase": "A",
+  "decisions": [
+    { "id": "LD-atlas-journal-01", "kind": "layout", "summary": "collection.grid-detail na variante lista densa com ficha lateral/Sheet", "status": "decidido" },
+    { "id": "H-01", "kind": "human", "summary": "Lista densa como padrão com alternância opcional para grade", "status": "pendente" }
+  ],
+  "layout": {
+    "decisionId": "LD-atlas-journal-01",
+    "pattern": "collection.grid-detail",
+    "rejected": [
+      { "pattern": "map.minimap-fullmap", "reason": "bom para descobrir, ruim para gerir duplicatas; vira atalho 'ver habitat'" },
+      { "pattern": "loadout.slot-catalog", "reason": "só 3 vitrines de museu; recurso secundário, não a tela" }
+    ]
+  },
+  "platforms": [
+    { "id": "desktop", "supported": true, "composition": "header com busca/filtros | lista densa | ficha lateral; bandeja de comparação no rodapé", "reflowTrigger": "base" },
+    { "id": "ultrawide", "supported": true, "composition": "root limitado por UISizeConstraint", "reflowTrigger": "largura > máximo do root" },
+    { "id": "phone-portrait", "supported": true, "composition": "header compacto, chips de bioma, lista de 64 px, ficha em Sheet", "reflowTrigger": "largura útil < 2× largura mínima da ficha" },
+    { "id": "phone-landscape", "supported": true, "composition": "rail de biomas estreito | lista; ficha em modal lateral", "reflowTrigger": "ViewportDisplaySize == Small e aspecto > 1" },
+    { "id": "tablet", "supported": true, "composition": "igual ao desktop sem coluna Dup. na linha", "reflowTrigger": "largura útil < limite das 6 colunas" },
+    { "id": "console-tv", "supported": true, "composition": "lista com foco por linha; ficha acompanha o foco; texto em tamanho de TV", "reflowTrigger": "PreferredInput == Gamepad" }
+  ],
+  "inputs": { "mouseKeyboard": true, "touch": true, "gamepad": true },
+  "focus": {
+    "initial": "row-specimen",
+    "back": "B fecha a ficha/Sheet; segundo B fecha o diário e devolve o foco ao jogo",
+    "route": ["tabs-biome", "row-specimen", "panel-detail", "compare-tray"]
+  },
+  "layers": [
+    { "screenGui": "JournalGui", "layer": "Menu", "displayOrder": 20, "screenInsets": "CoreUISafeInsets" },
+    { "screenGui": "DonateConfirmGui", "layer": "Modal", "displayOrder": 30, "screenInsets": "CoreUISafeInsets" }
+  ],
+  "components": [
+    { "id": "row-specimen", "type": "ItemCard", "role": "linha densa com miniatura, nome, carimbo e duplicatas", "assets": ["atlas.specimens.forest"], "states": ["idle", "hover", "selected", "focus", "disabled", "pending"] },
+    { "id": "sheet-detail", "type": "Sheet", "role": "ficha do espécime em telas estreitas", "states": ["idle", "pending", "error"] },
+    { "id": "panel-detail", "type": "Panel", "role": "ficha do espécime em telas largas", "assets": ["texture.paper.lines"], "states": ["idle"] },
+    { "id": "tabs-biome", "type": "Tab", "role": "escopo por bioma", "states": ["idle", "hover", "selected", "focus"] },
+    { "id": "compare-tray", "type": "Custom", "role": "bandeja que compara dois espécimes lado a lado", "states": ["idle", "focus", "disabled"] },
+    { "id": "empty-journal", "type": "EmptyState", "role": "diário vazio com próximo passo", "states": ["idle"] },
+    { "id": "skeleton-rows", "type": "LoadingSkeleton", "role": "linhas reservadas durante paginação", "states": ["pending"] },
+    { "id": "err-load", "type": "ErrorState", "role": "falha de carga com tentar de novo", "states": ["error", "pending"] },
+    { "id": "donate-footer", "type": "ConfirmationFooter", "role": "resumo e confirmação de doação de duplicatas", "states": ["idle", "pending", "success", "error", "disabled"] },
+    { "id": "focus-ring", "type": "FocusRing", "role": "foco tracejado de alto contraste", "states": ["focus"] }
+  ],
+  "states": [
+    { "id": "empty", "applicable": true, "text": "Seu diário está vazio. Capture um inseto no Bosque Inicial.", "action": "Ir ao mapa", "recovery": "n/a", "captureRequired": true },
+    { "id": "loading", "applicable": true, "text": "(skeleton)", "action": "ações desabilitadas", "recovery": "timeout → error", "captureRequired": true },
+    { "id": "error", "applicable": true, "text": "Não foi possível abrir esta página do diário.", "action": "Tentar de novo", "recovery": "refetch; linhas já carregadas permanecem", "captureRequired": true },
+    { "id": "disabled", "applicable": true, "text": "Doação indisponível: espécime fixado", "action": "desafixar", "recovery": "n/a", "captureRequired": true },
+    { "id": "pending", "applicable": true, "text": "Doando 3…", "action": "bloqueada", "recovery": "erro → error com itens intactos", "captureRequired": true },
+    { "id": "overflow", "applicable": true, "text": "Mostrando 1–100 de 1.212", "action": "próxima página", "recovery": "n/a", "captureRequired": true },
+    { "id": "full", "applicable": true, "text": "Coleção completa neste bioma", "action": "ver outro bioma", "recovery": "n/a", "captureRequired": true },
+    { "id": "no-results", "applicable": true, "text": "Nada para a busca. Limpar filtros?", "action": "limpar filtros", "recovery": "n/a", "captureRequired": true },
+    { "id": "missing", "applicable": true, "text": "??? (silhueta + bioma)", "action": "ver habitat", "recovery": "n/a", "captureRequired": true }
+  ],
+  "risk": {
+    "cancel": "Cancelar no footer e B fecham sem doar",
+    "recovery": "falha devolve contagem original",
+    "errorHandling": "ErrorState inline com tentar de novo",
+    "confirmation": "footer mostra espécie e quantidade antes de confirmar",
+    "serverAuthority": "servidor valida posse, contagem e fixação; doação atômica"
+  },
+  "assets": [
+    { "id": "texture.paper.lines", "status": "planned", "robloxAssetId": null, "fallback": "Frame cor papel com linhas nativas de 1 px" },
+    { "id": "atlas.specimens.forest", "status": "prompt-ready", "robloxAssetId": null, "fallback": "silhueta genérica nativa" }
+  ],
+  "evidence": [
+    { "id": "E-01", "kind": "heuristic", "claim": "Coleções complexas devem oferecer filtros, abas ou busca", "source": "AC-02 XAG 112", "date": "2026-10-22", "confidence": "média" },
+    { "id": "E-02", "kind": "official", "claim": "Flex tem custo extra; grade e lista têm usos distintos", "source": "OF-03", "date": "2026-10-22", "confidence": "alta" },
+    { "id": "E-03", "kind": "observed", "claim": "Simulators de coleção usam categorias e busca em inventários grandes", "source": "BM-01", "date": "2026-10-22", "confidence": "baixa" },
+    { "id": "E-04", "kind": "hypothesis", "claim": "Lista densa reduz rolagem para encontrar faltantes", "source": "proposta desta especificação", "date": "2026-10-22", "confidence": "baixa" }
+  ],
+  "manualActions": [
+    { "id": "M-01", "action": "Decidir H-01 (lista densa como padrão)", "owner": "dono do projeto" },
+    { "id": "M-02", "action": "Gerar/enviar atlas por bioma e textura de papel", "owner": "artista", "blocks": "fase D" },
+    { "id": "M-03", "action": "Capturar estados nas 6 plataformas", "owner": "QA com Studio", "blocks": "veredito visual" }
+  ]
+}

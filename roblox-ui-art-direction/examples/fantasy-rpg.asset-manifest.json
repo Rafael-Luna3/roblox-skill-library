@@ -1,0 +1,582 @@
+{
+  "$schemaVersion": "1.0",
+  "game": "Ashen Crown (simulado)",
+  "theme": "ember-tome",
+  "styleAnchor": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente.",
+  "assets": [
+    {
+      "id": "panel.tome.frame",
+      "purpose": "Livro aberto de couro com cantoneiras de ferro",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 1024,
+        "height": 1024
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          160,
+          160,
+          864,
+          864
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.3
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Livro aberto de couro com cantoneiras de ferro. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "InventoryGui.Root"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "surface.parchment.tile",
+      "purpose": "Pergaminho repetível",
+      "type": "texture",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": false,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Pergaminho repetível. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "Page"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "header.banner.iron",
+      "purpose": "Faixa de ferro para título",
+      "type": "header",
+      "theme": "ember-tome",
+      "size": {
+        "width": 1024,
+        "height": 192
+      },
+      "aspectRatio": "1024:192",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          192,
+          64,
+          832,
+          128
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Faixa de ferro para título. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "Header"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "frame.slot.empty",
+      "purpose": "Moldura de slot de equipamento vazio",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          56,
+          56,
+          200,
+          200
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Moldura de slot de equipamento vazio. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "Slot_*"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "frame.rarity.common",
+      "purpose": "Moldura de item raridade common (material próprio)",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          56,
+          56,
+          200,
+          200
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Moldura de item raridade common (material próprio). Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ItemCell"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "frame.rarity.uncommon",
+      "purpose": "Moldura de item raridade uncommon (material próprio)",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          56,
+          56,
+          200,
+          200
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Moldura de item raridade uncommon (material próprio). Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ItemCell"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "frame.rarity.rare",
+      "purpose": "Moldura de item raridade rare (material próprio)",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          56,
+          56,
+          200,
+          200
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Moldura de item raridade rare (material próprio). Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ItemCell"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "frame.rarity.epic",
+      "purpose": "Moldura de item raridade epic (material próprio)",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          56,
+          56,
+          200,
+          200
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Moldura de item raridade epic (material próprio). Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ItemCell"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "frame.rarity.relic",
+      "purpose": "Moldura de item raridade relic (material próprio)",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          56,
+          56,
+          200,
+          200
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.35
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Moldura de item raridade relic (material próprio). Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ItemCell"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "atlas.items.weapons",
+      "purpose": "Atlas 8x8 de armas pintadas",
+      "type": "spritesheet",
+      "theme": "ember-tome",
+      "size": {
+        "width": 1024,
+        "height": 1024
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Atlas 8x8 de armas pintadas. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ItemCell.Icon"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "ornament.divider.vine",
+      "purpose": "Divisor ornamental de ferro e videira",
+      "type": "ornament",
+      "theme": "ember-tome",
+      "size": {
+        "width": 1024,
+        "height": 64
+      },
+      "aspectRatio": "1024:64",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Divisor ornamental de ferro e videira. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "Divider"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "button.iron.base",
+      "purpose": "Botão de ferro forjado",
+      "type": "button",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 96
+      },
+      "aspectRatio": "256:96",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          48,
+          32,
+          208,
+          64
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.4
+      },
+      "states": [
+        "idle",
+        "hover",
+        "disabled"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Botão de ferro forjado. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "IronButton"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "button.iron.pressed",
+      "purpose": "Botão de ferro afundado",
+      "type": "button",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 96
+      },
+      "aspectRatio": "256:96",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          48,
+          32,
+          208,
+          64
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.4
+      },
+      "states": [
+        "press"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Botão de ferro afundado. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "IronButton"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "panel.tooltip.parchment",
+      "purpose": "Tooltip de pergaminho",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          40,
+          40,
+          216,
+          216
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.4
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Tooltip de pergaminho. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "Tooltip"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "bar.frame.iron",
+      "purpose": "Trilha de barra de vida em ferro",
+      "type": "frame-9slice",
+      "theme": "ember-tome",
+      "size": {
+        "width": 512,
+        "height": 64
+      },
+      "aspectRatio": "512:64",
+      "transparent": true,
+      "nineSlice": {
+        "sliceCenter": [
+          48,
+          24,
+          464,
+          40
+        ],
+        "sliceScaleDesktop": 0.5,
+        "sliceScaleMobile": 0.4
+      },
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Trilha de barra de vida em ferro. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "HUD.HealthBar"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "map.world.base",
+      "purpose": "Mapa-mundi ilustrado",
+      "type": "illustration",
+      "theme": "ember-tome",
+      "size": {
+        "width": 1024,
+        "height": 1024
+      },
+      "aspectRatio": "1:1",
+      "transparent": false,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": false,
+      "atlas": null,
+      "prompt": "Pintura digital de livro de fantasia, couro, ferro forjado e pergaminho envelhecido, luz quente de vela, paleta terrosa com acentos brasa, vista frontal, sem texto, fundo transparente. Asset: Mapa-mundi ilustrado. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "MapGui"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    }
+  ]
+}

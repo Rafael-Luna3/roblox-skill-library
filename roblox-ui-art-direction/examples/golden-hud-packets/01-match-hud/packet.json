@@ -1,0 +1,86 @@
+{
+  "$schema": "../../../schemas/hud-spec.schema.json",
+  "schemaVersion": "1.0",
+  "packetId": "HP-golden-01-match-hud",
+  "status": { "fictional": true, "visualVerdict": "pendente — sem captura", "note": "Jogo fictício Ironclad Skies; documentação sem captura." },
+  "game": { "name": "Ironclad Skies (fictício)", "genre": "batalha de dirigíveis 4v4", "visualStyle": "instrumentos de latão pintados" },
+  "screen": { "id": "match-hud", "name": "HUD de partida", "task": "agir", "context": "combate", "gameplay": true, "risk": "high" },
+  "phase": "A",
+  "decisions": [
+    { "id": "LD-ironclad-match-01", "kind": "layout", "summary": "match.overlay com placar/faróis no topo e medidores nos cantos", "status": "decidido" },
+    { "id": "H-01", "kind": "human", "summary": "Mostradores circulares vs barras horizontais", "status": "pendente" }
+  ],
+  "layout": {
+    "decisionId": "LD-ironclad-match-01",
+    "pattern": "match.overlay",
+    "rejected": [
+      { "pattern": "survival.contextual", "reason": "HUD diegético esconde estado explícito necessário em jogo competitivo" },
+      { "pattern": "collection.hotbar", "reason": "não há troca de itens; as 2 armas são fixas e já estão no overlay" }
+    ]
+  },
+  "platforms": [
+    { "id": "desktop", "supported": true, "composition": "placar+faróis+timer topo-centro; medidores inferior-esquerdo; armas inferior-direito", "reflowTrigger": "base" },
+    { "id": "ultrawide", "supported": true, "composition": "overlay confinado à área 16:9 central", "reflowTrigger": "aspecto > 21:9 → container central com UISizeConstraint" },
+    { "id": "phone-landscape", "supported": true, "composition": "faixa única no topo; medidores acima do joystick; armas em arco acima de BOOST/FIRE", "reflowTrigger": "ViewportDisplaySize == Small" },
+    { "id": "phone-portrait", "supported": false },
+    { "id": "tablet", "supported": true, "composition": "igual ao desktop com ações relativas aos controles touch", "reflowTrigger": "TouchEnabled e ViewportDisplaySize == Medium" },
+    { "id": "console-tv", "supported": true, "composition": "igual ao desktop com números +25% e glifos LT/RT/A; TV-safe", "reflowTrigger": "PreferredInput == Gamepad" }
+  ],
+  "inputs": { "mouseKeyboard": true, "touch": true, "gamepad": true },
+  "focus": {
+    "initial": "round-end",
+    "back": "Durante a partida o HUD não captura foco; no RoundEndGui o foco inicial é 'Continuar' e B abre o menu de saída com confirmação",
+    "route": ["round-end"]
+  },
+  "protectedZones": ["centro (mira)", "joystick esquerdo", "cluster de disparo/boost direito", "topbar/CoreGui"],
+  "layers": [
+    { "screenGui": "MatchHudGui", "layer": "GameplayHUD", "displayOrder": 5, "screenInsets": "DeviceSafeInsets" },
+    { "screenGui": "MatchActionsGui", "layer": "GameplayHUD", "displayOrder": 6, "screenInsets": "CoreUISafeInsets" },
+    { "screenGui": "RoundEndGui", "layer": "CriticalOverlay", "displayOrder": 50, "screenInsets": "CoreUISafeInsets" }
+  ],
+  "components": [
+    { "id": "gauge-hull", "type": "ProgressBar", "role": "mostrador de casco com ponteiro e número", "assets": ["gauge.hull.face"], "states": ["idle", "error"] },
+    { "id": "gauge-steam", "type": "ProgressBar", "role": "barra de vapor segmentada", "states": ["idle", "disabled", "success"] },
+    { "id": "weapon-left", "type": "IconButton", "role": "arma esquerda com recarga radial e glifo", "assets": ["atlas.weapons"], "states": ["idle", "pending", "disabled"] },
+    { "id": "weapon-right", "type": "IconButton", "role": "arma direita com recarga radial e glifo", "assets": ["atlas.weapons"], "states": ["idle", "pending", "disabled"] },
+    { "id": "beacon-strip", "type": "Custom", "role": "três faróis com dono indicado por cor e ícone", "assets": ["icon.beacon"], "states": ["idle", "pending"] },
+    { "id": "scoreboard", "type": "Panel", "role": "placar e timer em moldura de latão", "assets": ["panel.brass.frame"], "states": ["idle"] },
+    { "id": "killfeed", "type": "Toast", "role": "fila de até 4 abates", "states": ["idle"] },
+    { "id": "round-end", "type": "Modal", "role": "resultado, causa e próximo passo", "states": ["idle", "focus", "pending"] }
+  ],
+  "states": [
+    { "id": "empty", "applicable": false, "reason": "durante a partida o HUD sempre tem dados" },
+    { "id": "loading", "applicable": true, "text": "Embarcando…", "action": "nenhuma", "recovery": "timeout → tentar reconectar", "captureRequired": true },
+    { "id": "error", "applicable": true, "text": "Conexão instável", "action": "nenhuma", "recovery": "reconexão automática mantendo último estado", "captureRequired": true },
+    { "id": "disabled", "applicable": true, "text": "VAZIO", "action": "aguardar recarga", "recovery": "recarga automática", "captureRequired": true },
+    { "id": "pending", "applicable": true, "text": "1.2s", "action": "nenhuma", "recovery": "fim da recarga", "captureRequired": true },
+    { "id": "overflow", "applicable": true, "text": "feed acima de 4 linhas", "action": "nenhuma", "recovery": "linhas antigas expiram", "captureRequired": true },
+    { "id": "full", "applicable": true, "text": "MAX", "action": "boost disponível", "recovery": "n/a", "captureRequired": true },
+    { "id": "beacon-contested", "applicable": true, "text": "B em disputa", "action": "nenhuma", "recovery": "servidor resolve posse", "captureRequired": true },
+    { "id": "dead", "applicable": true, "text": "Abatido — volta em 5s", "action": "espectar", "recovery": "respawn", "captureRequired": true }
+  ],
+  "risk": {
+    "cancel": "não há ação irreversível no HUD; sair da partida exige confirmação no menu",
+    "recovery": "reconexão mantém último estado conhecido",
+    "errorHandling": "indicador de conexão instável no topo, sem modal",
+    "confirmation": "saída da partida confirmada em modal separado",
+    "serverAuthority": "dano, posse de faróis, placar e recargas calculados no servidor"
+  },
+  "assets": [
+    { "id": "gauge.hull.face", "status": "planned", "robloxAssetId": null, "fallback": "Frame circular com UICorner e número nativo" },
+    { "id": "panel.brass.frame", "status": "planned", "robloxAssetId": null, "fallback": "Frame com UIStroke cor latão" },
+    { "id": "atlas.weapons", "status": "planned", "robloxAssetId": null, "fallback": "letras L/R em círculo nativo" },
+    { "id": "icon.beacon", "status": "planned", "robloxAssetId": null, "fallback": "círculo nativo com letra A/B/C" }
+  ],
+  "evidence": [
+    { "id": "E-01", "kind": "official", "claim": "Objetivo e pontos no topo por serem decisivos para vencer", "source": "OF-13", "date": "2026-10-22", "confidence": "alta" },
+    { "id": "E-02", "kind": "official", "claim": "Ações perto dos controles touch existentes; zonas de polegar variam", "source": "OF-06", "date": "2026-10-22", "confidence": "alta" },
+    { "id": "E-03", "kind": "observed", "claim": "Jogo de combate publica equivalentes de tecla, gamepad e toque para ações", "source": "BM-07", "date": "2026-10-22", "confidence": "média" },
+    { "id": "E-04", "kind": "hypothesis", "claim": "Mostradores circulares reforçam identidade sem perder leitura", "source": "proposta desta especificação", "date": "2026-10-22", "confidence": "baixa" }
+  ],
+  "manualActions": [
+    { "id": "M-01", "action": "Decidir H-01 (mostrador vs barra)", "owner": "dono do projeto", "blocks": "assets de medidores" },
+    { "id": "M-02", "action": "Produzir e enviar 4 assets e preencher robloxAssetId", "owner": "artista/dono", "blocks": "fase D" },
+    { "id": "M-03", "action": "Capturar todos os estados nas 5 plataformas suportadas", "owner": "QA com Studio", "blocks": "veredito visual" }
+  ]
+}

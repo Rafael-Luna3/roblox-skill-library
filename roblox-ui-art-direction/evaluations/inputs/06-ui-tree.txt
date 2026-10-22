@@ -1,0 +1,15 @@
+# Estrutura fictícia para o cenário 06 (fornecer ao Claude como ui-tree.txt)
+StarterGui
+  MainHud (ScreenGui, ResetOnSpawn=false, DisplayOrder=1, ScreenInsets=None)
+    CoinsLabel (TextLabel)        -- posição: topo-esquerdo, cobre o chat no celular
+    GemsLabel (TextLabel)
+    ShopButton (TextButton)       -- topo-esquerdo, ao lado do chat
+    QuestTracker (Frame)          -- FORA DO ESCOPO
+  InventoryGui (ScreenGui)        -- FORA DO ESCOPO
+ReplicatedStorage
+  Remotes
+    BuyItem (RemoteEvent)         -- FORA DO ESCOPO, usado por ShopController e InventoryController
+StarterPlayerScripts
+  HudController (LocalScript)     -- referencia MainHud.CoinsLabel, MainHud.GemsLabel e MainHud.ShopButton por nome
+  ShopController (LocalScript)
+  InventoryController (LocalScript)

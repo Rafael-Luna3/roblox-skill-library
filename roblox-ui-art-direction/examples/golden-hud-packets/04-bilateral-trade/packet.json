@@ -1,0 +1,84 @@
+{
+  "$schema": "../../../schemas/hud-spec.schema.json",
+  "schemaVersion": "1.0",
+  "packetId": "HP-golden-04-trade",
+  "status": { "fictional": true, "visualVerdict": "pendente — sem captura" },
+  "game": { "name": "Saltmarsh Harbor (fictício)", "genre": "pesca cooperativa e vila costeira", "visualStyle": "aquarela de vila de pescadores" },
+  "screen": { "id": "trade", "name": "Troca entre jogadores", "task": "negociar", "context": "social", "gameplay": false, "risk": "critical" },
+  "phase": "A",
+  "decisions": [
+    { "id": "LD-saltmarsh-trade-01", "kind": "layout", "summary": "trade.bilateral-confirm portrait-first com mesas empilhadas e resumo de status", "status": "decidido" },
+    { "id": "H-01", "kind": "human", "summary": "Destacar peso/raridade do item do outro", "status": "pendente" }
+  ],
+  "layout": {
+    "decisionId": "LD-saltmarsh-trade-01",
+    "pattern": "trade.bilateral-confirm",
+    "rejected": [
+      { "pattern": "commerce.catalog-detail", "reason": "mercado assíncrono não atende troca ao vivo entre amigos" }
+    ]
+  },
+  "platforms": [
+    { "id": "phone-portrait", "supported": true, "composition": "mesas empilhadas Você/Outro com 6 slots compactos; rodapé com Recusar/Pronto", "reflowTrigger": "largura < 2× largura mínima de uma mesa de 6 slots" },
+    { "id": "phone-landscape", "supported": true, "composition": "mesas lado a lado com slots em linha rolável", "reflowTrigger": "altura útil < duas mesas + rodapé" },
+    { "id": "tablet", "supported": true, "composition": "mesas lado a lado, rodapé comum", "reflowTrigger": "largura ≥ 2× mesa mínima" },
+    { "id": "desktop", "supported": true, "composition": "mesas lado a lado, rodapé comum, seletor em Sheet lateral", "reflowTrigger": "base" },
+    { "id": "ultrawide", "supported": false },
+    { "id": "console-tv", "supported": true, "composition": "mesas lado a lado; ↑/↓ alterna mesas; TV-safe", "reflowTrigger": "PreferredInput == Gamepad" }
+  ],
+  "inputs": { "mouseKeyboard": true, "touch": true, "gamepad": true },
+  "focus": {
+    "initial": "btn-add",
+    "back": "B fecha o seletor; na mesa, B pede confirmação para sair da troca; Confirmar nunca recebe foco inicial nem é acionado por B",
+    "route": ["btn-add", "slot-item", "trade-footer"]
+  },
+  "layers": [
+    { "screenGui": "TradeGui", "layer": "Modal", "displayOrder": 40, "screenInsets": "CoreUISafeInsets" },
+    { "screenGui": "TradeInventoryGui", "layer": "Modal", "displayOrder": 45, "screenInsets": "CoreUISafeInsets" }
+  ],
+  "components": [
+    { "id": "table-you", "type": "Panel", "role": "mesa do jogador com nome, contador e status", "assets": ["panel.rope.frame", "icon.side.boat"], "states": ["idle", "success"] },
+    { "id": "table-them", "type": "Panel", "role": "mesa do outro jogador com nome, contador e status", "assets": ["panel.rope.frame", "icon.side.hat"], "states": ["idle", "pending", "success"] },
+    { "id": "slot-item", "type": "ItemCard", "role": "item ofertado com ícone e acesso ao detalhe", "assets": ["atlas.fish.items"], "states": ["idle", "hover", "selected", "focus", "disabled"] },
+    { "id": "btn-add", "type": "Button", "role": "abre o seletor de inventário", "states": ["idle", "hover", "press", "focus", "disabled"] },
+    { "id": "banner-changed", "type": "Toast", "role": "aviso persistente de oferta alterada", "states": ["idle"] },
+    { "id": "trade-footer", "type": "ConfirmationFooter", "role": "Recusar, Pronto e Confirmar com countdown", "states": ["idle", "focus", "pending", "success", "error", "disabled"] },
+    { "id": "picker", "type": "Sheet", "role": "seletor de inventário com busca e filtros", "states": ["idle", "pending", "error"] },
+    { "id": "err-trade", "type": "ErrorState", "role": "cancelamento ou falha com motivo", "states": ["error"] }
+  ],
+  "states": [
+    { "id": "empty", "applicable": true, "text": "Adicione itens ou espere a oferta", "action": "Adicionar", "recovery": "n/a", "captureRequired": true },
+    { "id": "loading", "applicable": true, "text": "(itens do outro carregando)", "action": "Pronto desabilitado", "recovery": "timeout → error", "captureRequired": true },
+    { "id": "error", "applicable": true, "text": "A troca foi cancelada: o outro jogador saiu.", "action": "OK", "recovery": "itens voltam intactos; nada é trocado", "captureRequired": true },
+    { "id": "disabled", "applicable": true, "text": "Este item não pode ser trocado", "action": "nenhuma", "recovery": "n/a", "captureRequired": true },
+    { "id": "pending", "applicable": true, "text": "Trocando…", "action": "tudo bloqueado", "recovery": "erro → error sem troca parcial", "captureRequired": true },
+    { "id": "overflow", "applicable": true, "text": "6/6 — limite", "action": "remover item", "recovery": "n/a", "captureRequired": true },
+    { "id": "full", "applicable": true, "text": "O inventário do outro jogador está cheio", "action": "ajustar oferta", "recovery": "Pronto bloqueado até resolver", "captureRequired": true },
+    { "id": "offer-changed", "applicable": true, "text": "Oferta alterada — 'Pronto' desfeito", "action": "revisar e marcar Pronto", "recovery": "servidor zera ready", "captureRequired": true },
+    { "id": "countdown", "applicable": true, "text": "Confirmando em 3…", "action": "Cancelar", "recovery": "qualquer mudança cancela", "captureRequired": true },
+    { "id": "account-locked", "applicable": true, "text": "Trocas liberadas após 3 dias de conta", "action": "nenhuma", "recovery": "n/a", "captureRequired": true }
+  ],
+  "risk": {
+    "cancel": "Recusar a qualquer momento; Cancelar durante o countdown; saída de qualquer jogador cancela",
+    "recovery": "troca atômica: sem troca parcial; itens destravados ao cancelar",
+    "errorHandling": "ErrorState com motivo explícito (saiu, inventário cheio, item intransferível, versão desatualizada)",
+    "confirmation": "Pronto dos dois lados + Confirmar + countdown de 3 s cancelável",
+    "serverAuthority": "servidor valida posse, trava itens, rejeita versão desatualizada, zera ready em mudanças e executa a troca"
+  },
+  "assets": [
+    { "id": "panel.rope.frame", "status": "planned", "robloxAssetId": null, "fallback": "Frame com UIStroke sépia" },
+    { "id": "atlas.fish.items", "status": "prompt-ready", "robloxAssetId": null, "fallback": "nome do item em chip nativo" },
+    { "id": "icon.side.boat", "status": "planned", "robloxAssetId": null, "fallback": "inicial do nome em círculo" },
+    { "id": "icon.side.hat", "status": "planned", "robloxAssetId": null, "fallback": "inicial do nome em círculo" }
+  ],
+  "evidence": [
+    { "id": "E-01", "kind": "observed", "claim": "Wiki de jogo social descreve aceitar no canto inferior direito e recusar a qualquer momento", "source": "BM-05", "date": "2026-10-22", "confidence": "média" },
+    { "id": "E-02", "kind": "heuristic", "claim": "Toda alteração deve invalidar o Pronto dos dois lados", "source": "references/hud-layout-intelligence/patterns/bilateral-trade.md", "date": "2026-10-22", "confidence": "média" },
+    { "id": "E-03", "kind": "hypothesis", "claim": "Mesas empilhadas no portrait reduzem confusão sobre quem oferece o quê", "source": "proposta desta especificação", "date": "2026-10-22", "confidence": "baixa" }
+  ],
+  "manualActions": [
+    { "id": "M-01", "action": "Decidir H-01 (destaque de peso/raridade)", "owner": "dono do projeto" },
+    { "id": "M-02", "action": "Definir regras reais de trade (slots, idade de conta)", "owner": "dono do projeto", "blocks": "implementação do servidor" },
+    { "id": "M-03", "action": "Capturar estados com dois clientes de teste", "owner": "QA no Studio (multi-client)", "blocks": "veredito visual" },
+    { "id": "M-04", "action": "Produzir moldura, atlas e ícones de lado", "owner": "artista", "blocks": "fase D" }
+  ]
+}

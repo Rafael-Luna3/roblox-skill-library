@@ -1,0 +1,189 @@
+{
+  "$schemaVersion": "1.0",
+  "game": "Vector Drift (simulado)",
+  "theme": "helmet-holo",
+  "styleAnchor": "Ícone de UI holográfica, linhas finas 2px ciano sobre transparente, vetorial plano, sem sombras, sem textura, vista frontal, sem texto, fundo transparente.",
+  "assets": [
+    {
+      "id": "corner.bracket",
+      "purpose": "Colchete de canto chanfrado (rotacionado 4x)",
+      "type": "ornament",
+      "theme": "helmet-holo",
+      "size": {
+        "width": 64,
+        "height": 64
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "Ícone de UI holográfica, linhas finas 2px ciano sobre transparente, vetorial plano, sem sombras, sem textura, vista frontal, sem texto, fundo transparente. Asset: Colchete de canto chanfrado (rotacionado 4x). Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "HoloPanel"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "atlas.modules",
+      "purpose": "Atlas 4x4 de ícones de módulos monocromáticos",
+      "type": "spritesheet",
+      "theme": "helmet-holo",
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "Ícone de UI holográfica, linhas finas 2px ciano sobre transparente, vetorial plano, sem sombras, sem textura, vista frontal, sem texto, fundo transparente. Asset: Atlas 4x4 de ícones de módulos monocromáticos. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ModuleIcon"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "hud.reticle",
+      "purpose": "Retícula de mira",
+      "type": "icon",
+      "theme": "helmet-holo",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "Ícone de UI holográfica, linhas finas 2px ciano sobre transparente, vetorial plano, sem sombras, sem textura, vista frontal, sem texto, fundo transparente. Asset: Retícula de mira. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "HUD.Reticle"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "hud.radar.ring",
+      "purpose": "Anel do radar",
+      "type": "ornament",
+      "theme": "helmet-holo",
+      "size": {
+        "width": 512,
+        "height": 512
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "Ícone de UI holográfica, linhas finas 2px ciano sobre transparente, vetorial plano, sem sombras, sem textura, vista frontal, sem texto, fundo transparente. Asset: Anel do radar. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "HUD.Radar"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "fx.scanline.tile",
+      "purpose": "Scanline repetível 6% opacidade",
+      "type": "texture",
+      "theme": "helmet-holo",
+      "size": {
+        "width": 64,
+        "height": 64
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": true,
+      "atlas": null,
+      "prompt": "Ícone de UI holográfica, linhas finas 2px ciano sobre transparente, vetorial plano, sem sombras, sem textura, vista frontal, sem texto, fundo transparente. Asset: Scanline repetível 6% opacidade. Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "Visor.Overlay"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    },
+    {
+      "id": "icon.module.railgun",
+      "purpose": "Ícone de módulo railgun (célula do atlas)",
+      "type": "icon",
+      "theme": "helmet-holo",
+      "size": {
+        "width": 128,
+        "height": 128
+      },
+      "aspectRatio": "1:1",
+      "transparent": true,
+      "nineSlice": null,
+      "states": [
+        "default"
+      ],
+      "tintable": true,
+      "atlas": {
+        "sheet": "atlas.modules",
+        "cell": [
+          0,
+          0
+        ],
+        "cellSize": 128
+      },
+      "prompt": "Ícone de UI holográfica, linhas finas 2px ciano sobre transparente, vetorial plano, sem sombras, sem textura, vista frontal, sem texto, fundo transparente. Asset: Ícone de módulo railgun (célula do atlas). Sem texto.",
+      "source": "planned",
+      "license": "a definir na produção",
+      "status": "prompt-ready",
+      "localPath": null,
+      "robloxAssetId": null,
+      "fallback": "Frame nativo com tokens do tema, marcado PLACEHOLDER",
+      "usedBy": [
+        "ModuleIcon"
+      ],
+      "notes": "Teste documental: nenhum arquivo gerado."
+    }
+  ]
+}

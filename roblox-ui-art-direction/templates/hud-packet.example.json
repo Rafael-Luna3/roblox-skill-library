@@ -1,0 +1,70 @@
+{
+  "$schema": "../schemas/hud-spec.schema.json",
+  "schemaVersion": "1.0",
+  "packetId": "HP-example-settings",
+  "status": {
+    "fictional": true,
+    "visualVerdict": "pendente — sem captura",
+    "note": "Exemplo mínimo de referência. Copie para docs/ui/<tela>/<tela>.packet.json e substitua tudo."
+  },
+  "game": { "name": "Exemplo (fictício)", "genre": "aventura cooperativa", "visualStyle": "flat minimalista" },
+  "screen": { "id": "settings", "name": "Configurações", "task": "configurar", "context": "menu", "gameplay": false, "risk": "low" },
+  "phase": "A",
+  "decisions": [
+    { "id": "LD-example-settings-01", "kind": "layout", "summary": "settings.hierarchy: sidebar no wide, lista → subpágina no narrow", "status": "decidido" },
+    { "id": "H-01", "kind": "human", "summary": "Agrupar acessibilidade numa categoria própria ou dentro de Gráficos", "status": "pendente" }
+  ],
+  "layout": {
+    "decisionId": "LD-example-settings-01",
+    "pattern": "settings.hierarchy",
+    "rejected": [
+      { "pattern": "nav.main-menu", "reason": "não é ponto de entrada do jogo; precisa de categorias com subopções" }
+    ]
+  },
+  "platforms": [
+    { "id": "desktop", "supported": true, "composition": "sidebar de categorias | conteúdo com descrição da opção focada", "reflowTrigger": "base: largura útil comporta rótulos da sidebar sem truncar" },
+    { "id": "phone-portrait", "supported": true, "composition": "lista de categorias → subpágina com controles grandes; voltar no topo", "reflowTrigger": "ViewportDisplaySize == Small ou sidebar truncaria rótulos" },
+    { "id": "phone-landscape", "supported": true, "composition": "sidebar estreita só com rótulos curtos | conteúdo", "reflowTrigger": "altura útil < 2 linhas de controle + header → esconder descrição" },
+    { "id": "tablet", "supported": true, "composition": "igual ao desktop com UISizeConstraint no root", "reflowTrigger": "mesma regra do desktop" },
+    { "id": "ultrawide", "supported": true, "composition": "root limitado por UISizeConstraint e centralizado", "reflowTrigger": "largura > máximo do root → margens laterais" },
+    { "id": "console-tv", "supported": true, "composition": "sidebar + conteúdo; texto no tamanho de TV; TV-safe", "reflowTrigger": "PreferredInput == Gamepad → mostrar glifos LB/RB e B" }
+  ],
+  "inputs": { "mouseKeyboard": true, "touch": true, "gamepad": true },
+  "focus": {
+    "initial": "cat-audio",
+    "back": "B/Esc volta um nível (conteúdo → categoria → fecha a tela e devolve o foco ao botão de origem)",
+    "route": ["cat-audio", "opt-music", "btn-reset"]
+  },
+  "layers": [
+    { "screenGui": "SettingsGui", "layer": "Menu", "displayOrder": 20, "screenInsets": "CoreUISafeInsets" },
+    { "screenGui": "ConfirmGui", "layer": "Modal", "displayOrder": 30, "screenInsets": "CoreUISafeInsets" }
+  ],
+  "components": [
+    { "id": "cat-audio", "type": "Tab", "role": "categoria Áudio na sidebar", "states": ["idle", "hover", "selected", "focus"] },
+    { "id": "opt-music", "type": "ProgressBar", "role": "slider de volume da música com valor numérico", "states": ["idle", "focus", "disabled"] },
+    { "id": "btn-reset", "type": "Button", "role": "restaurar padrões da categoria", "states": ["idle", "hover", "press", "focus", "pending", "success", "error"] },
+    { "id": "panel-root", "type": "Panel", "role": "moldura da tela", "assets": ["panel.settings.frame"], "states": ["idle"] },
+    { "id": "focus-ring", "type": "FocusRing", "role": "indicador de foco de alto contraste", "states": ["focus"] }
+  ],
+  "states": [
+    { "id": "empty", "applicable": false, "reason": "toda categoria tem ao menos uma opção" },
+    { "id": "loading", "applicable": true, "text": "Carregando preferências…", "action": "controles desabilitados", "recovery": "timeout → valores padrão locais + aviso", "captureRequired": true },
+    { "id": "error", "applicable": true, "text": "Não foi possível salvar. Suas alterações anteriores foram mantidas.", "action": "Tentar de novo", "recovery": "reverter ao último valor salvo", "captureRequired": true },
+    { "id": "disabled", "applicable": true, "text": "Indisponível nesta plataforma", "action": "nenhuma", "recovery": "n/a", "captureRequired": true },
+    { "id": "pending", "applicable": true, "text": "Salvando…", "action": "bloqueia repetição do reset", "recovery": "erro → estado error", "captureRequired": false },
+    { "id": "overflow", "applicable": true, "text": "rótulo longo localizado quebra linha", "action": "rolar conteúdo", "recovery": "n/a", "captureRequired": true },
+    { "id": "full", "applicable": false, "reason": "não há capacidade/limite nesta tela" },
+    { "id": "reset-confirm", "applicable": true, "text": "Restaurar padrões de Áudio?", "action": "Cancelar (foco inicial) / Restaurar", "recovery": "Cancelar ou B fecha sem mudar", "captureRequired": true }
+  ],
+  "assets": [
+    { "id": "panel.settings.frame", "status": "planned", "robloxAssetId": null, "fallback": "Frame + UICorner + UIStroke com tokens do tema" }
+  ],
+  "evidence": [
+    { "id": "E-01", "kind": "official", "claim": "Modal acima do HUD via DisplayOrder maior em outra ScreenGui", "source": "OF-01 https://create.roblox.com/docs/ui/on-screen-containers", "date": "2026-10-22", "confidence": "alta" },
+    { "id": "E-02", "kind": "heuristic", "claim": "B volta um nível e há rota persistente de volta", "source": "AC-02 XAG 112", "date": "2026-10-22", "confidence": "média" }
+  ],
+  "manualActions": [
+    { "id": "M-01", "action": "Decidir H-01 (categoria de acessibilidade)", "owner": "dono do projeto", "blocks": "screen spec final" },
+    { "id": "M-02", "action": "Capturar estados marcados captureRequired nos 6 perfis", "owner": "QA/dev com Studio", "blocks": "veredito visual" }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Roblox UI Art Direction"
+  short_description: "Direção de arte, assets e UI Roblox de alto nível"
+  default_prompt: "Use $roblox-ui-art-direction para definir a direção de arte e implementar esta interface Roblox."
